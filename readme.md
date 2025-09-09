@@ -88,7 +88,7 @@ It allows users to **upload documents, manage them, and chat with an LLM** that 
 ```bash
 git clone https://github.com/your-username/rag-chatbot.git
 cd rag-chatbot
-
+```
 ### 2️⃣ Create Virtual Environment
 python -m venv venv
 source venv/bin/activate   # Linux/Mac
