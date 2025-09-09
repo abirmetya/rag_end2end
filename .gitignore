@@ -1,0 +1,6 @@
+.env
+.venev
+api/__pycache__
+api/chroma_db
+app/__pycache__
+chroma_db

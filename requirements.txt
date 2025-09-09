@@ -1,0 +1,11 @@
+dotenv
+langchain-openai
+langchain-community==0.3.29
+langchain-text-splitters
+docx2txt
+pypdf
+sentence-transformers
+langchain-chroma
+fastapi
+uvicorn
+python-multipart
