@@ -100,20 +100,20 @@ pip install -r requirements.txt
 ### 4️⃣ Set Environment Variables
 OPENAI_API_KEY=your_key_here
 
-▶️ Usage
-1️⃣ Start Backend (FastAPI)
+## ▶️ Usage
+#### 1️⃣ Start Backend (FastAPI)
 uvicorn main:app --reload --port 8000
 
-2️⃣ Run Frontend (Streamlit)
+#### 2️⃣ Run Frontend (Streamlit)
 streamlit run app.py
 
-3️⃣ Interact with the App
+#### 3️⃣ Interact with the App
 
-Upload / delete documents
+- Upload / delete documents
 
-Choose LLM model
+- Choose LLM model
 
-Ask questions and get RAG-powered answers
+- Ask questions and get RAG-powered answers
 
 📂 API Endpoints
 Method	Endpoint	Description
