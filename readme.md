@@ -1,115 +1,103 @@
-🧠 Retrieval-Augmented Generation (RAG) Chatbot
+# 🧠 Retrieval-Augmented Generation (RAG) Chatbot
 
-This repository contains an end-to-end RAG (Retrieval-Augmented Generation) workflow integrated into a Streamlit web app.
-It allows users to upload documents, manage them, and chat with an LLM that can reference both uploaded knowledge and prior conversations for context.
+This repository contains an **end-to-end RAG (Retrieval-Augmented Generation) workflow** integrated into a **Streamlit web app**.  
+It allows users to **upload documents, manage them, and chat with an LLM** that can reference both uploaded knowledge and prior conversations for context.
 
-🚀 Features
+---
 
-Document Management
+## 🚀 Features
 
-Upload documents (PDF/TXT/MD/etc.)
+- **Document Management**  
+  - Upload documents (PDF/TXT/MD/etc.)  
+  - List available documents  
+  - Delete documents  
 
-List available documents
+- **Chat with Context**  
+  - Supports **query contextualization** (rewrites ambiguous queries using history)  
+  - Stores **previous chats in SQLite** with session IDs for persistence  
+  - Retrieval of relevant chunks from uploaded docs for **RAG-powered responses**  
 
-Delete documents
+- **Model Flexibility**  
+  - Choose from multiple **LLM backends** at runtime  
+  - Custom embeddings for document storage and retrieval  
 
-Chat with Context
+- **Backend APIs (FastAPI)**  
+  - `upload_document` – Upload files  
+  - `delete_document` – Remove stored docs  
+  - `list_document` – Get document list  
+  - `chat` – Query with contextual history  
 
-Supports query contextualization (rewrites ambiguous queries using history)
+- **Frontend (Streamlit)**  
+  - Simple **UI to interact with the system**  
+  - Select LLM model  
+  - Upload/Delete documents  
+  - Chat with memory-aware RAG  
 
-Stores previous chats in SQLite with session IDs for persistence
+---
 
-Retrieval of relevant chunks from uploaded docs for RAG-powered responses
+## 🏗️ Architecture Overview
 
-Model Flexibility
+         ┌───────────────┐
+         │   Streamlit   │  ⇦ User interacts here
+         └───────┬───────┘
+                 │
+          (API Calls via HTTP)
+                 │
+     ┌───────────▼────────────┐
+     │        FastAPI         │
+     │ Endpoints:             │
+     │  • upload_document     │
+     │  • delete_document     │
+     │  • list_document       │
+     │  • chat                │
+     └───────────┬────────────┘
+                 │
+    ┌────────────▼───────────────┐
+    │      RAG Workflow           │
+    │ ┌─────────┬──────────────┐ │
+    │ │Embedder │ Retriever     │ │
+    │ │ (Vector │ (DB Search)  │ │
+    │ │ Store)  │               │ │
+    │ └─────────┴──────────────┘ │
+    │       │                     │
+    │       ▼                     │
+    │   Query Contextualizer      │
+    │ (with SQLite Chat History)  │
+    │       │                     │
+    │       ▼                     │
+    │         LLM                 │
+    └─────────────────────────────┘
 
-Choose from multiple LLM backends at runtime
 
-Custom embeddings for document storage and retrieval
+---
 
-Backend APIs (FastAPI)
+## 📦 Tech Stack
 
-upload_document – Upload files
+- **Frontend:** Streamlit  
+- **Backend API:** FastAPI  
+- **Database:** SQLite (for chat history + session IDs)  
+- **Embeddings:** (OpenAI / HuggingFace / any chosen model)  
+- **Vector Store:** (e.g., FAISS / Chroma / Pinecone — depending on config)  
+- **LLMs:** (OpenAI GPT / Llama / etc. — user selectable)  
 
-delete_document – Remove stored docs
+---
 
-list_document – Get document list
+## ⚙️ Installation
 
-chat – Query with contextual history
-
-Frontend (Streamlit)
-
-Simple UI to interact with the system
-
-Select LLM model
-
-Upload/Delete documents
-
-Chat with memory-aware RAG
-
-🏗️ Architecture Overview
-             ┌───────────────┐
-             │   Streamlit   │  ⇦ User interacts here
-             └───────┬───────┘
-                     │
-              (API Calls via HTTP)
-                     │
-         ┌───────────▼────────────┐
-         │        FastAPI         │
-         │ Endpoints:             │
-         │  • upload_document     │
-         │  • delete_document     │
-         │  • list_document       │
-         │  • chat                │
-         └───────────┬────────────┘
-                     │
-        ┌────────────▼───────────────┐
-        │      RAG Workflow           │
-        │ ┌─────────┬──────────────┐ │
-        │ │Embedder │ Retriever     │ │
-        │ │ (Vector │ (DB Search)  │ │
-        │ │ Store)  │               │ │
-        │ └─────────┴──────────────┘ │
-        │       │                     │
-        │       ▼                     │
-        │   Query Contextualizer      │
-        │ (with SQLite Chat History)  │
-        │       │                     │
-        │       ▼                     │
-        │         LLM                 │
-        └─────────────────────────────┘
-
-📦 Tech Stack
-
-Frontend: Streamlit
-
-Backend API: FastAPI
-
-Database: SQLite (for chat history + session IDs)
-
-Embeddings: (OpenAI / HuggingFace / any chosen model)
-
-Vector Store: (e.g., FAISS / Chroma / Pinecone — depending on config)
-
-LLMs: (OpenAI GPT / Llama / etc. — user selectable)
-
-⚙️ Installation
-1️⃣ Clone Repository
+### 1️⃣ Clone Repository
+```bash
 git clone https://github.com/your-username/rag-chatbot.git
 cd rag-chatbot
 
-2️⃣ Create Virtual Environment
+### 2️⃣ Create Virtual Environment
 python -m venv venv
 source venv/bin/activate   # Linux/Mac
 venv\Scripts\activate      # Windows
 
-3️⃣ Install Dependencies
+### 3️⃣ Install Dependencies
 pip install -r requirements.txt
 
-4️⃣ Set Environment Variables
-
-Create a .env file and add your keys:
-
+### 4️⃣ Set Environment Variables
 OPENAI_API_KEY=your_key_here
 
 ▶️ Usage
@@ -171,5 +159,3 @@ Please open an issue or PR for any bug fixes, feature requests, or improvements.
 📜 License
 
 This project is licensed under the MIT License.
-
-Do you want me to also generate a sample folder structure with placeholder files (e.g., app.py, main.py, db.py, utils/, etc.) so the README directly matches the repo structure?
